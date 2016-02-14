@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <script type="text/javascript" src="node_modules/deepstream.io-client-js/dist/deepstream.js"></script>
+    </head>
+    <body>
+        <input type="text" />
+        <script type="text/javascript">
+            var ds = deepstream('localhost:6020').login();
+            var record = ds.record.getRecord('someUser');
+            var input = document.querySelector('input');
+
+            input.onkeyup = function() {
+                record.set('firstname', input.value);
+            };
+
+            record.subscribe('firstname', function(value) {
+                input.value = value;
+            });
+        </script>
+    </body>
+</html>
