@@ -4,6 +4,7 @@
     </head>
     <body>
         <input type="text" />
+        <button onclick="login()" >login</button>
         <script type="text/javascript">
             var ds = deepstream('localhost:6020').login();
             var record = ds.record.getRecord('someUser');
@@ -16,6 +17,15 @@
             record.subscribe('firstname', function(value) {
                 input.value = value;
             });
+
+            function login() {
+                ds.login({
+                    user: 'kohei',
+                    password: 'password'
+                }, function (success, errorCode, errorMessage) {
+                    console.log(success);
+                });
+            }
         </script>
     </body>
 </html>
